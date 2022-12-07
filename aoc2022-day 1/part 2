@@ -36,3 +36,4 @@ while (getline(file,line)){
   auto newEnd = remove(storage.begin(), storage.end(), *largestElement);
     cout << total; }
 }
+
