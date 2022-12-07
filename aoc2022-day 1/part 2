@@ -1,0 +1,38 @@
+#include <iostream>
+#include <fstream>
+#include <vector>
+#include <algorithm>
+using namespace std;
+
+int main() {
+int nowlargest = 0;
+int newlargest = 0;
+int total = 0;
+string line;
+
+ifstream file("input.txt");
+vector<int> storage = {};
+  
+while (getline(file,line)){
+  if (line.empty()) {
+    if (newlargest == 0) {
+      newlargest = nowlargest; }
+
+    else if (newlargest > nowlargest) {
+      nowlargest = newlargest; }
+      storage.push_back(newlargest);
+  newlargest = 0;
+  }
+  else {
+    newlargest += stoi(line); }
+} 
+  cout<<nowlargest<<"\n";
+
+  vector<int> largest3= {};
+  for (int i=0;i<3;i++){
+    auto largestElement = max_element(storage.begin(), storage.end()); //find the largest element
+    cout << "The largest element is: " << *largestElement << endl;
+  total += *largestElement;
+  auto newEnd = remove(storage.begin(), storage.end(), *largestElement);
+    cout << total; }
+}
