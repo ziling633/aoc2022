@@ -1,0 +1,26 @@
+#include <iostream>
+#include <fstream>
+using namespace std;
+
+int main() {
+  int nowlargest = 0;
+  int newlargest = 0; 
+  string myText;
+
+  ifstream numFile("input.txt");
+  while (getline(numFile, myText)) {
+    if (myText.empty()) { //bank line
+      if (nowlargest == 0){ 
+        nowlargest = newlargest; 
+        /*assign the total calories from the first elf as the largest calories for now*/
+        }
+      else if (newlargest>nowlargest) {
+        nowlargest = newlargest; } 
+        /*overlap the lastest largest no of calories over the previous largest no. of calories*/
+      newlargest = 0;
+    }   
+     else {
+          newlargest += stoi(myText); }
+  } 
+  cout << nowlargest;
+}
