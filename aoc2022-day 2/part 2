@@ -1,0 +1,43 @@
+#include <iostream>
+#include <fstream>
+using namespace std;
+
+int main() {
+  string line;
+  int total = 0;
+
+  ifstream file("rps.txt");
+  
+  while (getline(file,line)) {
+    if (line == "A Y") {
+      total += 4;
+    }
+    else if (line == "A X") {
+      total += 3;
+    }
+    else if (line == "A Z") {
+      total += 8;
+    }
+
+    else if (line == "B Y") {
+      total += 5;
+    }
+    else if (line == "B X") {
+      total += 1;
+    }
+    else if (line == "B Z") {
+      total += 9;
+    }
+
+    else if (line == "C Y") {
+      total += 6;
+    }
+    else if (line == "C X") {
+      total += 2;
+    }
+    else if (line == "C Z") {
+      total += 7;
+    }
+  }
+  cout << total;
+}
