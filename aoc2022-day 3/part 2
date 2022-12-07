@@ -1,0 +1,62 @@
+#include <iostream>
+#include <vector>
+#include <fstream>
+#include <set>
+#include <algorithm>
+using namespace std;
+
+int main() {
+  vector<string> arr = {};
+  string line;
+  ifstream file("rucksack.txt");
+  while (getline(file,line)) {
+    arr.push_back(line); }
+
+  int sum = 0;
+  int total = 0;
+
+  for (int i = 0; i < arr.size(); i += 3) {
+    string s1 = arr.at(i);
+    string s2 = arr.at(i + 1);
+    string s3 = arr.at(i + 2);
+
+    set<char> common12;
+    set<char> common3 = {};
+    set<char> common;
+
+    //compare s1 and s2 -- common12
+    for (char ch : s1) {
+      if (s2.find(ch) != string::npos) {
+        common12.insert(ch); } }
+  
+    //put elements in s3 into common3
+    for (char ch : s3) {
+        common3.insert(ch); }
+    
+    //find common letter between common12 and common3
+    set_intersection(common12.begin(), common12.end(), common3.begin(), common3.end(), inserter(common, common.begin()));
+
+//calculation
+  vector<string> small = {"0","a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"};
+  vector<string> big = {"0","A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"};
+    for (auto i : common) {
+      string s = string(1, i);
+
+      if (find(small.begin(), small.end(), s) != small.end()) { 
+        for (int e=1;e<27;e++) {
+          if (s == small[e]) {
+            total += e; }
+        }
+      }
+      else {
+        for (int e=1;e<27;e++) {
+          if (s == big[e]) {
+            total += e;
+            total += 26;}
+        }
+      }
+    }
+    sum = total;
+  }
+  cout << sum;
+}
